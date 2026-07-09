@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Clock, ChevronLeft, ChevronRight, Calendar as CalendarIcon, Filter } from 'lucide-react';
 import { useMemories } from '@/hooks/useMemories';
-import { formatDate, formatTime } from '@/lib/utils';
+import { formatDate } from '@/lib/utils';
 import { Memory } from '@/types';
 
 type ViewMode = 'all' | 'year' | 'month' | 'day';

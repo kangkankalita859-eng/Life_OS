@@ -52,6 +52,7 @@ export default function MemoryCapture() {
     handleSubmit,
     formState: { errors },
     watch,
+    reset,
   } = useForm<MemoryFormData>({
     resolver: zodResolver(memorySchema),
     defaultValues: {
@@ -112,7 +113,7 @@ export default function MemoryCapture() {
         description: data.description,
         fullStory: data.fullStory || '',
         shortSummary: data.description,
-        date: new Date(data.date),
+        date: data.date, // Store as string (ISO format from date input)
         time: data.time,
         location: data.location ? { name: data.location } : undefined,
         emotions: selectedEmotions.map((e) => ({
@@ -138,6 +139,7 @@ export default function MemoryCapture() {
       setTags([]);
       setSelectedCategories([]);
       alert('Memory created successfully!');
+      reset();
     } catch (error) {
       console.error('Error creating memory:', error);
       alert('Failed to create memory');

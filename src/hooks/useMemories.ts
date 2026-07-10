@@ -72,7 +72,13 @@ export function useMemories() {
   const useMemoriesByDate = (date: Date) => {
     return useQuery({
       queryKey: ['memories', 'byDate', date.toDateString()],
-      queryFn: () => db.memories.where('date').equals(date).toArray(),
+      queryFn: async () => {
+        const allMemories = await db.memories.toArray();
+        return allMemories.filter(memory => {
+          const memoryDate = new Date(memory.date);
+          return memoryDate.toDateString() === date.toDateString();
+        });
+      },
     });
   };
 
@@ -80,7 +86,12 @@ export function useMemories() {
   const useMemoriesByCategory = (category: string) => {
     return useQuery({
       queryKey: ['memories', 'byCategory', category],
-      queryFn: () => db.memories.where('categories').equals(category).toArray(),
+      queryFn: async () => {
+        const allMemories = await db.memories.toArray();
+        return allMemories.filter(memory => 
+          memory.categories.includes(category)
+        );
+      },
     });
   };
 

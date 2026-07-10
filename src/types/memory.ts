@@ -60,7 +60,7 @@ export interface Memory {
   description: string;
   fullStory: string;
   shortSummary: string;
-  date: Date;
+  date: string; // ISO date string from HTML date input
   time?: string;
   location?: Location;
   

@@ -100,50 +100,50 @@ export default function Dashboard() {
       {/* Stats Overview */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {/* Total Memories */}
-        <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-6 text-white shadow-lg hover:shadow-xl transition-shadow">
+        <Link to="/timeline" className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 cursor-pointer">
           <div className="flex items-center justify-between mb-4">
             <BarChart3 className="w-8 h-8 opacity-80" />
             <span className="text-sm opacity-80">Total</span>
           </div>
           <p className="text-4xl font-bold mb-1">{memories.length}</p>
           <p className="text-sm opacity-80">Memories</p>
-        </div>
+        </Link>
 
         {/* Journal Streak */}
-        <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl p-6 text-white shadow-lg hover:shadow-xl transition-shadow">
+        <Link to="/statistics" className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 cursor-pointer">
           <div className="flex items-center justify-between mb-4">
             <Flame className="w-8 h-8 opacity-80" />
             <span className="text-sm opacity-80">Streak</span>
           </div>
           <p className="text-4xl font-bold mb-1">{journalStreak}</p>
           <p className="text-sm opacity-80">Days</p>
-        </div>
+        </Link>
 
         {/* This Month */}
-        <div className="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-6 text-white shadow-lg hover:shadow-xl transition-shadow">
+        <Link to="/timeline" className="bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 cursor-pointer">
           <div className="flex items-center justify-between mb-4">
             <Calendar className="w-8 h-8 opacity-80" />
             <span className="text-sm opacity-80">This Month</span>
           </div>
           <p className="text-4xl font-bold mb-1">{thisMonthMemories}</p>
           <p className="text-sm opacity-80">Memories</p>
-        </div>
+        </Link>
 
         {/* Favorites */}
-        <div className="bg-gradient-to-br from-pink-500 to-pink-600 rounded-2xl p-6 text-white shadow-lg hover:shadow-xl transition-shadow">
+        <Link to="/timeline" className="bg-gradient-to-br from-pink-500 to-pink-600 rounded-2xl p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105 cursor-pointer">
           <div className="flex items-center justify-between mb-4">
             <Heart className="w-8 h-8 opacity-80" />
             <span className="text-sm opacity-80">Favorites</span>
           </div>
           <p className="text-4xl font-bold mb-1">{favoriteMemories.data?.length || 0}</p>
           <p className="text-sm opacity-80">Memories</p>
-        </div>
+        </Link>
       </div>
 
       {/* Content Boxes */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         {/* Today's Memories */}
-        <div className="bg-card border-2 border-border rounded-2xl p-6 hover:border-primary/50 transition-colors shadow-sm hover:shadow-md">
+        <Link to={todayMemories.data && todayMemories.data.length > 0 ? "/timeline" : "/capture"} className="bg-card border-2 border-border rounded-2xl p-6 hover:border-primary/50 transition-all hover:shadow-md cursor-pointer block">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <div className="p-3 bg-blue-100 rounded-xl">
@@ -164,24 +164,24 @@ export default function Dashboard() {
                 </div>
               ))}
               {todayMemories.data.length > 3 && (
-                <Link to="/timeline" className="flex items-center gap-2 text-sm text-primary hover:underline">
+                <div className="flex items-center gap-2 text-sm text-primary">
                   View all <ArrowRight className="w-4 h-4" />
-                </Link>
+                </div>
               )}
             </div>
           ) : (
             <div className="text-center py-6">
               <Calendar className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
               <p className="text-muted-foreground">No memories today</p>
-              <Link to="/capture" className="text-sm text-primary hover:underline mt-2 inline-block">
+              <span className="text-sm text-primary mt-2 inline-block">
                 Capture your first memory
-              </Link>
+              </span>
             </div>
           )}
-        </div>
+        </Link>
 
         {/* On This Day */}
-        <div className="bg-card border-2 border-border rounded-2xl p-6 hover:border-primary/50 transition-colors shadow-sm hover:shadow-md">
+        <Link to={onThisDayMemories.length > 0 ? "/timeline" : "/capture"} className="bg-card border-2 border-border rounded-2xl p-6 hover:border-primary/50 transition-all hover:shadow-md cursor-pointer block">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <div className="p-3 bg-purple-100 rounded-xl">
@@ -202,9 +202,9 @@ export default function Dashboard() {
                 </div>
               ))}
               {onThisDayMemories.length > 3 && (
-                <Link to="/timeline" className="flex items-center gap-2 text-sm text-primary hover:underline">
+                <div className="flex items-center gap-2 text-sm text-primary">
                   View all <ArrowRight className="w-4 h-4" />
-                </Link>
+                </div>
               )}
             </div>
           ) : (
@@ -213,10 +213,10 @@ export default function Dashboard() {
               <p className="text-muted-foreground">No memories on this day</p>
             </div>
           )}
-        </div>
+        </Link>
 
         {/* Recent Memories */}
-        <div className="bg-card border-2 border-border rounded-2xl p-6 hover:border-primary/50 transition-colors shadow-sm hover:shadow-md">
+        <Link to={memories.length > 0 ? "/timeline" : "/capture"} className="bg-card border-2 border-border rounded-2xl p-6 hover:border-primary/50 transition-all hover:shadow-md cursor-pointer block">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
               <div className="p-3 bg-green-100 rounded-xl">
@@ -236,24 +236,27 @@ export default function Dashboard() {
                 </div>
               ))}
               {memories.length > 3 && (
-                <Link to="/timeline" className="flex items-center gap-2 text-sm text-primary hover:underline">
+                <div className="flex items-center gap-2 text-sm text-primary">
                   View all <ArrowRight className="w-4 h-4" />
-                </Link>
+                </div>
               )}
             </div>
           ) : (
             <div className="text-center py-6">
               <TrendingUp className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
               <p className="text-muted-foreground">No memories yet</p>
+              <span className="text-sm text-primary mt-2 inline-block">
+                Capture your first memory
+              </span>
             </div>
           )}
-        </div>
+        </Link>
       </div>
 
       {/* Quick Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Locations */}
-        <div className="bg-card border-2 border-border rounded-2xl p-6 hover:border-primary/50 transition-colors shadow-sm hover:shadow-md">
+        <Link to="/search" className="bg-card border-2 border-border rounded-2xl p-6 hover:border-primary/50 transition-all hover:shadow-md cursor-pointer block">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-3 bg-red-100 rounded-xl">
               <MapPin className="w-6 h-6 text-red-600" />
@@ -262,10 +265,10 @@ export default function Dashboard() {
           </div>
           <p className="text-4xl font-bold text-primary mb-1">{uniqueLocations}</p>
           <p className="text-sm text-muted-foreground">Unique places visited</p>
-        </div>
+        </Link>
 
         {/* Books */}
-        <div className="bg-card border-2 border-border rounded-2xl p-6 hover:border-primary/50 transition-colors shadow-sm hover:shadow-md">
+        <Link to="/categories" className="bg-card border-2 border-border rounded-2xl p-6 hover:border-primary/50 transition-all hover:shadow-md cursor-pointer block">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-3 bg-yellow-100 rounded-xl">
               <BookOpen className="w-6 h-6 text-yellow-600" />
@@ -274,7 +277,7 @@ export default function Dashboard() {
           </div>
           <p className="text-4xl font-bold text-primary mb-1">{booksRead}</p>
           <p className="text-sm text-muted-foreground">Books recorded</p>
-        </div>
+        </Link>
 
         {/* Quick Actions */}
         <div className="bg-gradient-to-br from-primary/10 to-primary/5 border-2 border-primary/20 rounded-2xl p-6 hover:border-primary/40 transition-colors">

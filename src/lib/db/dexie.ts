@@ -15,7 +15,7 @@ export class LifeOSDatabase extends Dexie {
     
     // Define tables with indexes
     this.version(1).stores({
-      memories: 'id, date, createdAt, importance, privacy, isFavorite, isTimeCapsule, timeCapsuleOpenDate, *categories, *emotions.type, *people.id, *tags, *location.city, *location.country',
+      memories: 'id, date, createdAt, importance, privacy, isFavorite, isTimeCapsule, timeCapsuleOpenDate, *categories, *emotions.type, *people.id, *tags',
       people: 'id, name, createdAt',
       categories: 'id, slug, parentId, order',
       collections: 'id, createdAt',
